@@ -5,8 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Projets | Mamadou Leye Kane</title>
   <link href="CSS/index.css" rel="stylesheet" />
+  <link href="CSS/background.css" rel="stylesheet" />
+  <link href="CSS/menu.css" rel="stylesheet" />
+  <style>body { background: transparent !important; }</style>
 </head>
 <body>
+  <div id="background"></div>
+
+  <!-- Menú deslizante -->
+  <div id="nav" class="nav">
+    <div class="icon">
+      <ul>
+        <li><a title="Accueil" href="index.html"><i class="fa fa-home"></i></a></li>
+        <li><a title="Projets" href="projets.html"><i class="fa fa-code"></i></a></li>
+        <li><a title="Contact" href="contact.html"><i class="fa fa-envelope"></i></a></li>
+        <li><a title="GitHub" href="https://github.com/Brawnyh" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+    <div class="text">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="projets.html">Projets</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="https://github.com/Brawnyh" target="_blank">GitHub</a></li>
+      </ul>
+    </div>
+    <div class="info">
+      <div class="logo"><p>MLK</p></div>
+      <div class="name">Mamadou Leye Kane</div>
+      <div class="quote">Développeur Web</div>
+      <div class="social">
+        <a target="_blank" href="https://twitter.com/tmrDevelops"><i class="fa fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>
+
   <header>
     <h1>Mamadou Leye Kane</h1>
     <nav>
@@ -23,20 +56,14 @@
       <h2>Mes Projets</h2>
       <p>Voici quelques projets sur lesquels j'ai travaillé :</p>
       <ul>
-        <li>
-          <strong>Portfolio personnel</strong> – Site web responsive réalisé avec HTML, CSS, JavaScript.
-        </li>
-        <li>
-          <strong>Application de gestion de tâches</strong> – Projet React.js pour organiser mes tâches quotidiennes.
-        </li>
-        <li>
-          <strong>Mini-jeu en Python</strong> – Un jeu de devinettes pour pratiquer la programmation orientée objet.
-        </li>
-        <li>
-          <strong>Contributions Open Source</strong> – Participation à des projets sur GitHub.
-        </li>
+        <li><strong>Portfolio personnel</strong> – Site web responsive réalisé avec HTML, CSS, JavaScript.</li>
+        <li><strong>Application de gestion de tâches</strong> – Projet React.js pour organiser mes tâches quotidiennes.</li>
+        <li><strong>Mini-jeu en Python</strong> – Un jeu de devinettes pour pratiquer la programmation orientée objet.</li>
+        <li><strong>Contributions Open Source</strong> – Participation à des projets sur GitHub.</li>
       </ul>
-      <p>Pour voir plus de détails, vous pouvez visiter mon <a href="https://github.com/Brawnyh" target="_blank">GitHub</a>.</p>
+      <p>Pour voir plus de détails, vous pouvez visiter mon 
+        <a href="https://github.com/Brawnyh" target="_blank">GitHub</a>.
+      </p>
     </section>
   </main>
 
@@ -47,5 +74,40 @@
       🔗 <a href="https://www.linkedin.com/in/mamadou-leye-kane-914ab3314/" target="_blank">LinkedIn</a>
     </p>
   </footer>
+
+  <script>
+    const container = document.getElementById("background");
+    const particleCount = 100;
+    for (let i = 0; i < particleCount; i++) {
+      const c = document.createElement("div");
+      const inner = document.createElement("div");
+      const size = Math.random() * 10 + 4;
+      const startX = Math.random() * 100 + "vw";
+      const endX = Math.random() * 100 + "vw";
+      const duration = Math.random() * 7000 + 7000;
+      const delay = Math.random() * 11000;
+      c.classList.add("circle-container");
+      inner.classList.add("circle");
+      c.style.width = `${size}px`;
+      c.style.height = `${size}px`;
+      c.style.setProperty("--start-x", startX);
+      c.style.setProperty("--end-x", endX);
+      c.style.animation = `move ${duration}ms linear ${delay}ms infinite`;
+      inner.style.animationDelay = `${Math.random() * 4000}ms`;
+      c.appendChild(inner);
+      container.appendChild(c);
+    }
+
+    const nav = document.getElementById('nav');
+    let menuOpen = false;
+    nav.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        nav.classList.toggle('open');
+        menuOpen = !menuOpen;
+        nav.querySelector('.text').style.transform = menuOpen ? 'rotateY(0deg)' : 'perspective(1000px) rotateY(90deg)';
+        nav.querySelector('.info').style.opacity = menuOpen ? '1' : '0';
+      }
+    });
+  </script>
 </body>
 </html>
