@@ -1,103 +1,216 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Projets | Mamadou Leye Kane</title>
-  <link href="CSS/index.css" rel="stylesheet" />
-  <link href="CSS/background.css" rel="stylesheet" />
-  <link href="CSS/menu.css" rel="stylesheet" />
-  <style>body { background: transparent !important; }</style>
+  <link rel="stylesheet" href="CSS/style.css"/>
+  <style>
+    .page-hero {
+      padding: 80px 0 60px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(36px, 6vw, 56px);
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+
+    .page-hero p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 12px;
+      animation: fadeUp 0.6s ease 0.2s both;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-section { padding: 60px 0; }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    .project-card {
+      background: var(--surface);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: background 0.25s;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .project-card:hover { background: var(--surface2); }
+    .project-card:hover::before { opacity: 1; }
+
+    .project-num {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--muted);
+    }
+
+    .project-card h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .project-card p {
+      font-size: 12px;
+      color: #908880;
+      line-height: 1.8;
+      flex: 1;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      margin-top: 8px;
+      transition: gap 0.2s;
+    }
+
+    .project-link:hover { gap: 12px; }
+
+    @media (max-width: 768px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-  <div id="background"></div>
 
-  <!-- Menú deslizante -->
-  <div id="nav" class="nav">
-    <div class="icon">
-      <ul>
-        <li><a title="Accueil" href="index.html"><i class="fa fa-home"></i></a></li>
-        <li><a title="Projets" href="projets.html"><i class="fa fa-code"></i></a></li>
-        <li><a title="Contact" href="contact.html"><i class="fa fa-envelope"></i></a></li>
-        <li><a title="GitHub" href="https://github.com/Brawnyh" target="_blank"><i class="fa fa-github"></i></a></li>
-      </ul>
-    </div>
-    <div class="text">
-      <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="projets.html">Projets</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="https://github.com/Brawnyh" target="_blank">GitHub</a></li>
-      </ul>
-    </div>
-    <div class="info">
-      <div class="logo"><p>MLK</p></div>
-      <div class="name">Mamadou Leye Kane</div>
-      <div class="quote">Développeur junior</div>
-      <div class="social">
-        <a target="_blank" href="https://boxd.it/7tenb"><i class="fa fa-twitter"></i></a>
-      </div>
+<nav>
+  <a class="nav-logo" href="index.html">MLK</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="projets.html" class="active">Projets</a></li>
+    <li><a href="chat.html">Chat</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Accueil</a>
+  <a href="projets.html" class="active">Projets</a>
+  <a href="chat.html">Chat</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<main>
+  <div class="page-hero">
+    <div class="container">
+      <p class="section-label">Portfolio</p>
+      <h1>Projets</h1>
+      <p>Ce que j'ai construit — et ce que je construis.</p>
     </div>
   </div>
 
+  <section class="projects-section">
+    <div class="container">
+      <div class="projects-grid">
 
-  <main>
-    <section id="projets">
-      <h2>Mes Projets</h2>
-      <p>Voici quelques projets sur lesquels j'ai travaillé :</p>
-      <ul>
-        <li><strong>Portfolio personnel</strong> – Site web responsive réalisé avec HTML, CSS, JavaScript.</li>
-        <li><strong>simulation de un system de gestion de fichier</strong> – Projet C pour ameliorer ma gestion de fichier.</li>
-        <li><strong>Mini-jeu en Python</strong> – Un jeu de style mario maker pour pratiquer la POO.</li>
-        <li><strong>Contributions Open Source</strong> – Participation à des projets sur GitHub.</li>
-      </ul>
-      <p>Pour voir plus de détails, vous pouvez visiter mon 
-        <a href="https://github.com/Brawnyh" target="_blank">GitHub</a>.
-      </p>
-    </section>
-  </main>
+        <div class="project-card" style="animation-delay: 0.1s">
+          <div class="project-num">01</div>
+          <h2>Portfolio Web</h2>
+          <p>Site personnel responsive conçu pour présenter mon parcours et mes projets.</p>
+          <div class="project-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+          <a href="https://github.com/Brawnyh" target="_blank" class="project-link">Voir sur GitHub →</a>
+        </div>
 
-  <footer>
-    <p>&copy; 2025 Mamadou Leye Kane |
-      📧 <a href="mailto:mamadouleye2b@gmail.com">mamadouleye2b@gmail.com</a> |
-      📞 07 49 52 72 94 |
-      🔗 <a href="https://www.linkedin.com/in/mamadou-leye-kane-914ab3314/" target="_blank">LinkedIn</a>
-    </p>
-  </footer>
+        <div class="project-card" style="animation-delay: 0.2s">
+          <div class="project-num">02</div>
+          <h2>Système de gestion de fichiers</h2>
+          <p>Simulation en C d'un système de gestion de fichiers. Exercice pratique sur la manipulation de structures, la mémoire et les pointeurs.</p>
+          <div class="project-tags">
+            <span class="tag">C</span>
+            <span class="tag">Pointeurs</span>
+            <span class="tag">Fichiers</span>
+          </div>
+          <a href="https://github.com/Brawnyh" target="_blank" class="project-link">Voir sur GitHub →</a>
+        </div>
 
-  <script>
-    const container = document.getElementById("background");
-    const particleCount = 100;
-    for (let i = 0; i < particleCount; i++) {
-      const c = document.createElement("div");
-      const inner = document.createElement("div");
-      const size = Math.random() * 10 + 4;
-      const startX = Math.random() * 100 + "vw";
-      const endX = Math.random() * 100 + "vw";
-      const duration = Math.random() * 7000 + 7000;
-      const delay = Math.random() * 11000;
-      c.classList.add("circle-container");
-      inner.classList.add("circle");
-      c.style.width = `${size}px`;
-      c.style.height = `${size}px`;
-      c.style.setProperty("--start-x", startX);
-      c.style.setProperty("--end-x", endX);
-      c.style.animation = `move ${duration}ms linear ${delay}ms infinite`;
-      inner.style.animationDelay = `${Math.random() * 4000}ms`;
-      c.appendChild(inner);
-      container.appendChild(c);
-    }
+        <div class="project-card" style="animation-delay: 0.3s">
+          <div class="project-num">03</div>
+          <h2>Mini-jeu Python</h2>
+          <p>Jeu de type platformer inspiré de Mario Maker, développé en Python pour pratiquer la programmation orientée objet et la gestion d'état.</p>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">POO</span>
+            <span class="tag">Pygame</span>
+          </div>
+          <a href="https://github.com/Brawnyh" target="_blank" class="project-link">Voir sur GitHub →</a>
+        </div>
 
-    const nav = document.getElementById('nav');
-    let menuOpen = false;
-    nav.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
-        nav.classList.toggle('open');
-        menuOpen = !menuOpen;
-        nav.querySelector('.text').style.transform = menuOpen ? 'rotateY(0deg)' : 'perspective(1000px) rotateY(90deg)';
-        nav.querySelector('.info').style.opacity = menuOpen ? '1' : '0';
-      }
-    });
-  </script>
+        <div class="project-card" style="animation-delay: 0.4s">
+          <div class="project-num">04</div>
+          <h2>Contributions Open Source</h2>
+          <p>Participation active à des projets collaboratifs sur GitHub. Pratique du versioning, des pull requests et de la collaboration en équipe.</p>
+          <div class="project-tags">
+            <span class="tag">Git</span>
+            <span class="tag">GitHub</span>
+            <span class="tag">Collaboration</span>
+          </div>
+          <a href="https://github.com/Brawnyh" target="_blank" class="project-link">Voir le profil →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Mamadou Leye Kane</p>
+  <div class="footer-links">
+    <a href="mailto:mamadouleye2b@gmail.com">Email</a>
+    <a href="https://github.com/Brawnyh" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/mamadou-leye-kane-914ab3314/" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+</script>
 </body>
 </html>

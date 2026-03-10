@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chat | Mamadou Leye Kane</title>
+  <link rel="stylesheet" href="CSS/style.css"/>
+  <style>
+    /* ── WIP HERO ── */
+    .wip-hero {
+      min-height: calc(100vh - 64px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated grid background */
+    .wip-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(200,169,110,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,169,110,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridShift 20s linear infinite;
+    }
+
+    @keyframes gridShift {
+      from { background-position: 0 0; }
+      to   { background-position: 60px 60px; }
+    }
+
+    .wip-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 30%, var(--bg) 80%);
+      pointer-events: none;
+    }
+
+    .wip-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 560px;
+      padding: 0 24px;
+    }
+
+    .wip-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(200,169,110,0.25);
+      padding: 8px 18px;
+      margin-bottom: 36px;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+
+    .wip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: blink 2s ease infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.2; }
+    }
+
+    .wip-badge span {
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .wip-content h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(40px, 7vw, 68px);
+      line-height: 1.1;
+      margin-bottom: 20px;
+      animation: fadeUp 0.6s ease 0.2s both;
+    }
+
+    .wip-content h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .wip-content p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 40px;
+      animation: fadeUp 0.6s ease 0.3s both;
+    }
+
+    /* PROGRESS ROADMAP */
+    .roadmap {
+      text-align: left;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      padding: 28px;
+      margin-bottom: 36px;
+      animation: fadeUp 0.6s ease 0.4s both;
+    }
+
+    .roadmap-title {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .roadmap-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .roadmap-item:last-child { border-bottom: none; }
+
+    .step-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    .step-done  { background: rgba(200,169,110,0.12); color: var(--accent); border: 1px solid rgba(200,169,110,0.25); }
+    .step-wip   { background: rgba(200,169,110,0.06); color: var(--accent); border: 1px dashed rgba(200,169,110,0.3); }
+    .step-todo  { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
+
+    .step-label { font-size: 13px; color: var(--text); }
+    .step-sub   { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    .step-status {
+      margin-left: auto;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .status-done { color: var(--accent); }
+    .status-wip  { color: var(--accent); opacity: 0.6; }
+      .status-todo { color: var(--muted); }
+
+    /* BACK LINK */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s, gap 0.2s;
+      animation: fadeUp 0.6s ease 0.5s both;
+    }
+
+    .back-link:hover { color: var(--text); gap: 12px; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">MLK</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="projets.html">Projets</a></li>
+    <li><a href="chat.html" class="active">Chat</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Accueil</a>
+  <a href="projets.html">Projets</a>
+  <a href="chat.html" class="active">Chat</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<main>
+  <section class="wip-hero">
+    <div class="wip-content">
+
+      <div class="wip-badge">
+        <div class="wip-dot"></div>
+        <span>En développement</span>
+      </div>
+
+      <h1>Application<br/><em>de chat</em></h1>
+
+      <p>
+        Je développe un système de messagerie temps réel intégré à ce portfolio.
+        L'objectif : vous permettre de m'envoyer un message directement,
+        reçu instantanément dans une application dédiée de mon côté.
+      </p>
+
+      <div class="roadmap">
+        <div class="roadmap-title">Feuille de route</div>
+
+        <div class="roadmap-item">
+          <div class="step-icon step-done">✓</div>
+          <div>
+            <div class="step-label">Interface front-end</div>
+            <div class="step-sub">Design et structure de la page</div>
+          </div>
+          <span class="step-status status-done">Fait</span>
+        </div>
+
+        <div class="roadmap-item">
+          <div class="step-icon step-wip">◐</div>
+          <div>
+            <div class="step-label">Serveur back-end</div>
+            <div class="step-sub">API de réception des messages</div>
+          </div>
+          <span class="step-status status-wip">En cours</span>
+        </div>
+
+        <div class="roadmap-item">
+          <div class="step-icon step-todo">○</div>
+          <div>
+            <div class="step-label">WebSocket temps réel</div>
+            <div class="step-sub">Transmission instantanée</div>
+          </div>
+          <span class="step-status status-todo">À venir</span>
+        </div>
+
+        <div class="roadmap-item">
+          <div class="step-icon step-todo">○</div>
+          <div>
+            <div class="step-label">Application client</div>
+            <div class="step-sub">Réception des messages sur mon appareil</div>
+          </div>
+          <span class="step-status status-todo">À venir</span>
+        </div>
+
+        <div class="roadmap-item">
+          <div class="step-icon step-todo">○</div>
+          <div>
+            <div class="step-label">Mise en production</div>
+            <div class="step-sub">Déploiement et tests</div>
+          </div>
+          <span class="step-status status-todo">À venir</span>
+        </div>
+      </div>
+
+      <a href="contact.html" class="back-link">← Me contacter autrement</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Mamadou Leye Kane</p>
+  <div class="footer-links">
+    <a href="mailto:mamadouleye2b@gmail.com">Email</a>
+    <a href="https://github.com/Brawnyh" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/mamadou-leye-kane-914ab3314/" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+</script>
+</body>
+</html>

@@ -1,129 +1,396 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Accueil | Mamadou Leye Kane</title>
-  <link href="CSS/index.css" rel="stylesheet" />
-  <link href="CSS/background.css" rel="stylesheet" />
-  <link href="CSS/menu.css" rel="stylesheet" />
-  <style>body { background: transparent !important; }</style>
+  <title>Mamadou Leye Kane — Développeur</title>
+  <link rel="stylesheet" href="CSS/style.css"/>
+  <style>
+    /* ── HERO ── */
+    .hero {
+      min-height: calc(100vh - 64px);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 40px;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(48px, 8vw, 88px);
+      line-height: 1.0;
+      color: var(--text);
+      margin-bottom: 12px;
+      animation: fadeUp 0.6s ease 0.2s both;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 460px;
+      margin: 24px 0 40px;
+      animation: fadeUp 0.6s ease 0.3s both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s ease 0.4s both;
+    }
+
+    .btn-primary {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #0c0c0e;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent2);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      background: transparent;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, transform 0.2s;
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: var(--muted);
+      transform: translateY(-2px);
+    }
+
+    /* ── SCROLL INDICATOR ── */
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: fadeIn 1s ease 1s both;
+    }
+
+    .scroll-hint span {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollPulse 2s ease infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 1; transform: scaleY(1); }
+      50% { opacity: 0.4; transform: scaleY(0.7); }
+    }
+
+    /* ── ABOUT SECTION ── */
+    .about {
+      padding: 100px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-text h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 36px;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .about-text p {
+      font-size: 13px;
+      color: #a09890;
+      line-height: 1.9;
+      margin-bottom: 16px;
+    }
+
+    .about-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding-top: 8px;
+    }
+
+    .stat-item {
+      border-left: 1px solid var(--border);
+      padding-left: 20px;
+    }
+
+    .stat-item .stat-val {
+      font-family: 'DM Serif Display', serif;
+      font-size: 32px;
+      color: var(--accent);
+    }
+
+    .stat-item .stat-label {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    /* ── SKILLS ── */
+    .skills {
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    .skill-cell {
+      background: var(--surface);
+      padding: 28px 24px;
+      transition: background 0.2s;
+    }
+
+    .skill-cell:hover { background: var(--surface2); }
+
+    .skill-cell .skill-icon {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .skill-cell h3 {
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .skill-cell p {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero-inner { padding: 0 20px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .scroll-hint { display: none; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Fondo animado -->
-  <div id="background"></div>
 
-  <!-- Menú deslizante -->
-  <div id="nav" class="nav">
-    <div class="icon">
-      <ul>
-        <li><a title="Accueil" href="index.html"><i class="fa fa-home"></i></a></li>
-        <li><a title="Projets" href="projets.html"><i class="fa fa-code"></i></a></li>
-        <li><a title="Contact" href="contact.html"><i class="fa fa-envelope"></i></a></li>
-        <li><a title="GitHub" href="https://github.com/Brawnyh" target="_blank"><i class="fa fa-github"></i></a></li>
-      </ul>
-    </div>
+<nav>
+  <a class="nav-logo" href="index.html">MLK</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Accueil</a></li>
+    <li><a href="projets.html">Projets</a></li>
+    <li><a href="chat.html">Chat</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="active">Accueil</a>
+  <a href="projets.html">Projets</a>
+  <a href="chat.html">Chat</a>
+  <a href="contact.html">Contact</a>
+</div>
 
-    <div class="text">
-      <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="projets.html">Projets</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="https://github.com/Brawnyh" target="_blank">GitHub</a></li>
-      </ul>
-    </div>
-
-    <div class="info">
-      <div class="logo"><p>MLK</p></div>
-      <div class="name">Mamadou Leye Kane</div>
-      <div class="quote">Développeur junior</div>
-      <div class="social">
-        <a target="_blank" href="https://boxd.it/7tenb"><i class="fa fa-twitter"></i></a>
+<main>
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Développeur · Toulouse</p>
+      <h1>Mamadou<br/><em>Leye Kane</em></h1>
+      <p class="hero-sub">
+        Étudiant en Informatique à l'Université Paul Sabatier.<br/>
+        Passionné par le développement back-end et la construction de systèmes robustes.
+      </p>
+      <div class="hero-actions">
+        <a href="projets.html" class="btn-primary">Voir mes projets</a>
+        <a href="contact.html" class="btn-ghost">Me contacter</a>
       </div>
     </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text" style="animation: fadeUp 0.7s ease 0.1s both;">
+          <p class="section-label">À propos</p>
+          <h2>Sur moi<br/>
+          <div class="divider"></div>
+          <p>Je m'intéresse à ce qui se passe côté serveur — la logique, la performance, l'architecture. Ce qui fait tourner une application, même quand l'interface est silencieuse.</p>
+          <p>Actuellement en deuxième année de licence, je consolide mes bases en C, Algorithmique et systèmes, tout en développant des projets personnels pour aller plus loin.</p>
+          <div style="margin-top: 24px; display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="tag tag-accent">C</span>
+            <span class="tag tag-accent">Python</span>
+            <span class="tag tag-accent">SQL</span>
+            <span class="tag tag-accent">HTML/CSS</span>
+            <span class="tag tag-accent">Java</span>
+            <span class="tag tag-accent">Git</span>
+            <span class="tag tag-accent">Ocaml</span>
+          </div>
+        </div>
+        <div class="about-stats" style="animation: fadeUp 0.7s ease 0.25s both;">
+          <div class="stat-item">
+            <div class="stat-val">L2</div>
+            <div class="stat-label">Licence Informatique · Paul Sabatier</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">Back-end</div>
+            <div class="stat-label">Domaine de spécialisation visé</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">2025</div>
+            <div class="stat-label">En activité · Toulouse</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="skills">
+    <div class="container">
+      <p class="section-label" style="animation: fadeUp 0.6s ease both;">Compétences</p>
+      <div class="skills-grid">
+        <div class="skill-cell">
+          <div class="skill-icon">⚙️</div>
+          <h3>Systèmes & C</h3>
+          <p>Gestion mémoire, pointeurs, fichiers, structures de données</p>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-icon">🐍</div>
+          <h3>Python</h3>
+          <p>POO, algorithmes, scripts, mini-projets applicatifs</p>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-icon">🗄️</div>
+          <h3>SQL</h3>
+          <p>Modélisation relationnelle, requêtes, bases de données</p>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-icon">🌐</div>
+          <h3>Web</h3>
+          <p>HTML, CSS, JavaScript — intégration et pages dynamiques</p>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-icon">🔧</div>
+          <h3>Git & GitHub</h3>
+          <p>Versioning, collaboration, gestion de projets ouverts</p>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-icon">🧩</div>
+          <h3>Algorithmique</h3>
+          <p>Tri, récursivité, paradigmes, complexité</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Mamadou Leye Kane</p>
+  <div class="footer-links">
+    <a href="mailto:mamadouleye2b@gmail.com">Email</a>
+    <a href="https://github.com/Brawnyh" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/mamadou-leye-kane-914ab3314/" target="_blank">LinkedIn</a>
   </div>
+</footer>
 
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
 
-
-  <main>
-    <section id="intro">
-      <h2>Bienvenue sur mon portfolio</h2>
-      <p>
-        Je suis <strong>Mamadou Leye Kane</strong>, passionné par le développement backend et les nouvelles technologies.
-        Ce site présente mes projets,mes compétences,mon parcours et mes coordonnées.
-      </p>
-      <a href="projets.html" class="btn">Voir mes projets</a>
-    </section>
-
-    <section id="Etudes">
-      <h2>Etudes</h2>
-      <p>
-       <strong> Université de Toulouse 3(Paul Sabatier)
-                Licence informatique 
-       </strong>
-
-      </p>
-
-      <p>
-      <strong>Lycée Ozenne BAC Général Especialité Maths/NSI+maths experts:</strong>
-              Introduction à python,SQL,trello les algorithmes de tri et les differentss paradigmes de programmation(2023)
-      </p>
-
-
-    </section>
-
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Mamadou Leye Kane |
-      📧 <a href="mailto:mamadouleye2b@gmail.com">mamadouleye2b@gmail.com</a> |
-      📞 07 49 52 72 94 |
-      🔗 <a href="https://www.linkedin.com/in/mamadou-leye-kane-914ab3314/" target="_blank">LinkedIn</a>
-    </p>
-  </footer>
-
-  <!-- Fondo animado -->
-  <script>
-    const container = document.getElementById("background");
-    const particleCount = 100;
-    for (let i = 0; i < particleCount; i++) {
-      const c = document.createElement("div");
-      const inner = document.createElement("div");
-      const size = Math.random() * 10 + 4;
-      const startX = Math.random() * 100 + "vw";
-      const endX = Math.random() * 100 + "vw";
-      const duration = Math.random() * 7000 + 7000;
-      const delay = Math.random() * 11000;
-      c.classList.add("circle-container");
-      inner.classList.add("circle");
-      c.style.width = `${size}px`;
-      c.style.height = `${size}px`;
-      c.style.setProperty("--start-x", startX);
-      c.style.setProperty("--end-x", endX);
-      c.style.animation = `move ${duration}ms linear ${delay}ms infinite`;
-      inner.style.animationDelay = `${Math.random() * 4000}ms`;
-      c.appendChild(inner);
-      container.appendChild(c);
-    }
-  </script>
-
-  <!-- JS para abrir/cerrar el menú en móvil -->
-  <script>
-    const nav = document.getElementById('nav');
-    let menuOpen = false;
-    nav.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
-        nav.classList.toggle('open');
-        menuOpen = !menuOpen;
-        if (menuOpen) {
-          nav.querySelector('.text').style.transform = 'rotateY(0deg)';
-          nav.querySelector('.info').style.opacity = '1';
-        } else {
-          nav.querySelector('.text').style.transform = 'perspective(1000px) rotateY(90deg)';
-          nav.querySelector('.info').style.opacity = '0';
-        }
+  // Intersection Observer for scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.animation = 'fadeUp 0.7s ease forwards';
+        observer.unobserve(e.target);
       }
     });
-  </script>
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.skill-cell').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.animationDelay = `${i * 0.06}s`;
+    observer.observe(el);
+  });
+</script>
 </body>
 </html>

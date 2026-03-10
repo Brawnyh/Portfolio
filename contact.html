@@ -1,110 +1,236 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact | Mamadou Leye Kane</title>
-  <link href="CSS/index.css" rel="stylesheet" />
-  <link href="CSS/background.css" rel="stylesheet" />
-  <link href="CSS/menu.css" rel="stylesheet" />
-  <style>body { background: transparent !important; }</style>
+  <link rel="stylesheet" href="CSS/style.css"/>
+  <style>
+    .page-hero {
+      padding: 80px 0 60px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(36px, 6vw, 56px);
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+
+    .page-hero p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 12px;
+      animation: fadeUp 0.6s ease 0.2s both;
+    }
+
+    /* ── CONTACT GRID ── */
+    .contact-section { padding: 60px 0; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    /* LEFT: LINKS */
+    .contact-info { animation: fadeUp 0.6s ease 0.15s both; }
+
+    .contact-info h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .contact-info > p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contact-item:first-of-type { border-top: 1px solid var(--border); }
+
+    .contact-item .c-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .contact-item a,
+    .contact-item span {
+      font-size: 13px;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-item a:hover { color: var(--accent); }
+
+    /* RIGHT: FORM */
+    .contact-form { animation: fadeUp 0.6s ease 0.25s both; }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      padding: 14px 16px;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .form-group textarea { height: 140px; }
+
+    .form-note {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+  </style>
 </head>
 <body>
-  <div id="background"></div>
 
-  <!-- Menú deslizante -->
-  <div id="nav" class="nav">
-    <div class="icon">
-      <ul>
-        <li><a title="Accueil" href="index.html"><i class="fa fa-home"></i></a></li>
-        <li><a title="Projets" href="projets.html"><i class="fa fa-code"></i></a></li>
-        <li><a title="Contact" href="contact.html"><i class="fa fa-envelope"></i></a></li>
-        <li><a title="GitHub" href="https://github.com/Brawnyh" target="_blank"><i class="fa fa-github"></i></a></li>
-      </ul>
-    </div>
-    <div class="text">
-      <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="projets.html">Projets</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="https://github.com/Brawnyh" target="_blank">GitHub</a></li>
-      </ul>
-    </div>
-    <div class="info">
-      <div class="logo"><p>MLK</p></div>
-      <div class="name">Mamadou Leye Kane</div>
-      <div class="quote">Développeur junior</div>
-      <div class="social">
-        <a target="_blank" href="https://boxd.it/7tenb"><i class="fa fa-twitter"></i></a>
-      </div>
+<nav>
+  <a class="nav-logo" href="index.html">MLK</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="projets.html">Projets</a></li>
+    <li><a href="chat.html">Chat</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Accueil</a>
+  <a href="projets.html">Projets</a>
+  <a href="chat.html">Chat</a>
+  <a href="contact.html" class="active">Contact</a>
+</div>
+
+<main>
+  <div class="page-hero">
+    <div class="container">
+      <p class="section-label">Contact</p>
+      <h1>Parlons-en.</h1>
+      <p>Une question, une opportunité, un projet — je suis disponible.</p>
     </div>
   </div>
 
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
 
-  <main>
-    <section id="contact">
-      <h2>Contactez-moi</h2>
-      <p>Vous pouvez me joindre par les moyens suivants :</p>
-      <ul>
-        <li>📧 Email : <a href="mailto:mamadouleye2b@gmail.com">mamadouleye2b@gmail.com</a></li>
-        <li>📞 Téléphone : 07 49 52 72 94</li>
-        <li>🔗 LinkedIn : <a href="https://www.linkedin.com/in/mamadou-leye-kane-914ab3314/" target="_blank">Mamadou Leye Kane</a></li>
-      </ul>
+        <div class="contact-info">
+          <h2>Coordonnées</h2>
+          <p>Vous pouvez me joindre directement par email ou via les réseaux ci-dessous.</p>
 
-      <h3>Ou envoyez-moi un message</h3>
-      <form action="#" method="post" onsubmit="return false;">
-        <label for="name">Nom :</label><br />
-        <input type="text" id="name" name="name" required /><br /><br />
-        <label for="email">Email :</label><br />
-        <input type="email" id="email" name="email" required /><br /><br />
-        <label for="message">Message :</label><br />
-        <textarea id="message" name="message" rows="5" required></textarea><br /><br />
-        <button type="submit">Envoyer</button>
-      </form>
-    </section>
-  </main>
+          <div class="contact-item">
+            <span class="c-label">Email</span>
+            <a href="mailto:mamadouleye2b@gmail.com">mamadouleye2b@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <span class="c-label">Téléphone</span>
+            <span>07 49 52 72 94</span>
+          </div>
+          <div class="contact-item">
+            <span class="c-label">GitHub</span>
+            <a href="https://github.com/Brawnyh" target="_blank">github.com/Brawnyh</a>
+          </div>
+          <div class="contact-item">
+            <span class="c-label">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/mamadou-leye-kane-914ab3314/" target="_blank">Mamadou Leye Kane</a>
+          </div>
+        </div>
 
-  <footer>
-    <p>&copy; 2025 Mamadou Leye Kane |
-      📧 <a href="mailto:mamadouleye2b@gmail.com">mamadouleye2b@gmail.com</a> |
-      📞 07 49 52 72 94 |
-      🔗 <a href="https://www.linkedin.com/in/mamadou-leye-kane-914ab3314/" target="_blank">LinkedIn</a>
-    </p>
-  </footer>
+        <div class="contact-form">
+          <p class="form-note">
+            Ce formulaire est en cours de connexion à un système de messagerie en temps réel.<br/>
+            En attendant, préférez un contact direct par email.
+          </p>
+          <div class="form-group">
+            <label for="name">Nom</label>
+            <input type="text" id="name" placeholder="Votre nom"/>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="votre@email.com"/>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="Votre message..."></textarea>
+          </div>
+          <button class="btn-primary" onclick="handleSubmit()">Envoyer</button>
+          <p id="form-feedback" style="font-size:12px;margin-top:14px;color:var(--muted);display:none;"></p>
+        </div>
 
-  <script>
-    const container = document.getElementById("background");
-    const particleCount = 100;
-    for (let i = 0; i < particleCount; i++) {
-      const c = document.createElement("div");
-      const inner = document.createElement("div");
-      const size = Math.random() * 10 + 4;
-      const startX = Math.random() * 100 + "vw";
-      const endX = Math.random() * 100 + "vw";
-      const duration = Math.random() * 7000 + 7000;
-      const delay = Math.random() * 11000;
-      c.classList.add("circle-container");
-      inner.classList.add("circle");
-      c.style.width = `${size}px`;
-      c.style.height = `${size}px`;
-      c.style.setProperty("--start-x", startX);
-      c.style.setProperty("--end-x", endX);
-      c.style.animation = `move ${duration}ms linear ${delay}ms infinite`;
-      inner.style.animationDelay = `${Math.random() * 4000}ms`;
-      c.appendChild(inner);
-      container.appendChild(c);
-    }
+      </div>
+    </div>
+  </section>
+</main>
 
-    const nav = document.getElementById('nav');
-    let menuOpen = false;
-    nav.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
-        nav.classList.toggle('open');
-        menuOpen = !menuOpen;
-        nav.querySelector('.text').style.transform = menuOpen ? 'rotateY(0deg)' : 'perspective(1000px) rotateY(90deg)';
-        nav.querySelector('.info').style.opacity = menuOpen ? '1' : '0';
-      }
-    });
-  </script>
+<footer>
+  <p>© 2025 Mamadou Leye Kane</p>
+  <div class="footer-links">
+    <a href="mailto:mamadouleye2b@gmail.com">Email</a>
+    <a href="https://github.com/Brawnyh" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/mamadou-leye-kane-914ab3314/" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+
+  function handleSubmit() {
+    const fb = document.getElementById('form-feedback');
+    fb.style.display = 'block';
+    fb.style.color = 'var(--accent)';
+    fb.textContent = '→ Système de messagerie en cours de développement. Contactez-moi directement par email pour l\'instant.';
+  }
+</script>
 </body>
 </html>
